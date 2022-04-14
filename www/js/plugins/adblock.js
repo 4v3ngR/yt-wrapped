@@ -5,7 +5,7 @@
   console.log("loading adblock");
 
   function interceptXHR(state, url, data) {
-    if (url.includes('youtube.com/watch?v=') && state === 'response') try {
+    if (url.includes('youtubei/v1/player?') && state === 'response') try {
       const resp = data.replace(/adPlacements/, 'odPlaements');
       return resp;
     } catch (ex) {

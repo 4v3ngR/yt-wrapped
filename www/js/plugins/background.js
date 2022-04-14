@@ -22,21 +22,18 @@
     return false;
   }, true);
 
-  var video = null;
-  var player = document.querySelector('ytmusic-player');
-  if (player) {
-    video = player.querySelector('video');
-    if (video) {
-      if (!video.dontStopTheMusic) {
-        video.dontStopTheMusic = true;
-        video.addEventListener('timeupdate', () => {
-          const { duration, currentTime } = video;
-          if (duration && currentTime + 1 >= duration) {
-            const button = document.querySelector("tp-yt-paper-icon-button.next-button");
-            if (button) button.click();
-          }
-        });
-      }
+  // the following is from https://greasyfork.org/en/scripts/437123-youtube-background-playback-kiwi-browser
+  const lactRefreshInterval = 5 * 60 * 1000; // 5 mins
+  const initialLactDelay = 1000;
+
+  // _lact stuff
+  function waitForYoutubeLactInit(delay = initialLactDelay) {
+    if (window.hasOwnProperty('_lact')) {
+      window.setInterval(() => { window._lact = Date.now(); }, lactRefreshInterval);
+    }
+    else{
+      window.setTimeout(() => waitForYoutubeLactInit(delay * 2), delay);
     }
   }
+  waitForYoutubeLactInit();
 })();
