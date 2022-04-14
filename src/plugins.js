@@ -4,6 +4,7 @@
     "xmlhttprequest.js": null,
     "tracking.js": null,
     "background.js": null,
+    "config.js": null,
     "adblock.js": null,
     "audioonly.js": null,
     "ui.js": null,
